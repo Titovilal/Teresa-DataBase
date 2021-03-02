@@ -126,6 +126,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="buttonVerPerfil" min="-2" pref="120" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="labelRn" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -144,8 +146,9 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelNombreTeatro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="buttonVerPerfil" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelRn" alignment="3" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -201,6 +204,18 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonVerPerfilActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelRn">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Gadugi" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="R.N."/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

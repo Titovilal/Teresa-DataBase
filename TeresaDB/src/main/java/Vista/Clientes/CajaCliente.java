@@ -37,6 +37,12 @@ public class CajaCliente extends javax.swing.JPanel {
         labelZonaTrabajo.setText(datos.get(6) + ", " + datos.get(7));
         labelOcupacion.setText(datos.get(8));
         labelNombreTeatro.setText(datos.get(9));
+        if (datos.get(11).equalsIgnoreCase("s")){
+            labelRn.setVisible(true);
+        }
+        else{
+            labelRn.setVisible(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -51,6 +57,7 @@ public class CajaCliente extends javax.swing.JPanel {
         labelNombreTeatro = new javax.swing.JLabel();
         labelOcupacion = new javax.swing.JLabel();
         buttonVerPerfil = new javax.swing.JButton();
+        labelRn = new javax.swing.JLabel();
         checkBoxEnviar = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(51, 51, 51));
@@ -94,6 +101,11 @@ public class CajaCliente extends javax.swing.JPanel {
             }
         });
 
+        labelRn.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        labelRn.setForeground(new java.awt.Color(255, 0, 0));
+        labelRn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelRn.setText("R.N.");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,6 +123,8 @@ public class CajaCliente extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonVerPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(labelRn)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,8 +137,9 @@ public class CajaCliente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNombreTeatro)
-                    .addComponent(buttonVerPerfil))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonVerPerfil)
+                    .addComponent(labelRn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         checkBoxEnviar.setBackground(new java.awt.Color(51, 51, 51));
@@ -184,6 +199,7 @@ public class CajaCliente extends javax.swing.JPanel {
     private javax.swing.JLabel labelNombreTeatro;
     private javax.swing.JLabel labelOcupacion;
     public javax.swing.JLabel labelPersona;
+    private javax.swing.JLabel labelRn;
     private javax.swing.JLabel labelZonaTrabajo;
     // End of variables declaration//GEN-END:variables
 }

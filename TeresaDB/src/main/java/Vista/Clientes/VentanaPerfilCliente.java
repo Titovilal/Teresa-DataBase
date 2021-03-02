@@ -17,13 +17,13 @@ public final class VentanaPerfilCliente extends javax.swing.JFrame {
     private Modelo modelo;
     private String idCliente;
     private boolean modificado = false, added = false;
-    private Ampliar ampliar;
+    private AmpliarCliente ampliar;
 
     public VentanaPerfilCliente(Modelo modelo) {
 
         this.modelo = modelo;
 
-        ampliar = new Ampliar(this);
+        ampliar = new AmpliarCliente(this);
 
         initComponents();
         this.addWindowListener(new SalirPrograma());
@@ -607,7 +607,7 @@ public final class VentanaPerfilCliente extends javax.swing.JFrame {
 
         s.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         s.setForeground(new java.awt.Color(255, 255, 255));
-        s.setText("Espectáculos Comprados");
+        s.setText("Espectáculos Vendidos");
 
         buttonAmpliar.setBackground(new java.awt.Color(51, 51, 51));
         buttonAmpliar.setFont(new java.awt.Font("Gadugi", 0, 12)); // NOI18N

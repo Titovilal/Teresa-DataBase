@@ -21,6 +21,7 @@ public class Vista extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         buttonAgendaClientes = new javax.swing.JButton();
+        buttonCias = new javax.swing.JButton();
         panelMain = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -47,20 +48,30 @@ public class Vista extends javax.swing.JFrame {
         buttonAgendaClientes.setText("Agenda Clientes");
         buttonAgendaClientes.setFocusPainted(false);
 
+        buttonCias.setBackground(new java.awt.Color(51, 51, 51));
+        buttonCias.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        buttonCias.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCias.setText("Cias");
+        buttonCias.setFocusPainted(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonAgendaClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonAgendaClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(buttonCias, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(buttonAgendaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(buttonAgendaClientes)
+                .addGap(40, 40, 40)
+                .addComponent(buttonCias, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -175,6 +186,7 @@ public class Vista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton buttonAgendaClientes;
+    public javax.swing.JButton buttonCias;
     public javax.swing.JMenuItem itemAcutalizar;
     public javax.swing.JMenuItem itemAddCliente;
     public javax.swing.JMenuItem itemContacto;

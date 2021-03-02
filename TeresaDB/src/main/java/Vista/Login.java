@@ -41,7 +41,6 @@ public class Login extends javax.swing.JFrame {
         textError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(new ImageIcon(getClass().getResource("/Vista/icon.png")).getImage());
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));

@@ -10,7 +10,7 @@ public class Cliente {
 
     private ArrayList<String> datos;
 
-    /*
+    /*  CLIENTE AGENDA CLIENTES
              * 0    ID
              * 1    NOMBRE
              * 2    TELEFONO MOVIL

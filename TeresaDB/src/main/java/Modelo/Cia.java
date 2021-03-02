@@ -5,8 +5,7 @@ package Modelo;
  * @author Salva Castells Juan
  */
 public class Cia {
-    private String nombreCia,espectaculos,genero;
-    private Cliente cliente;
+    private String nombreCia,espectaculos,genero, correo, nombreTecnico;
 
     public String getNombreCia() {
         return nombreCia;
@@ -32,11 +31,19 @@ public class Cia {
         this.genero = genero;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getNombreTecnico() {
+        return nombreTecnico;
+    }
+
+    public void setNombreTecnico(String nombreTecnico) {
+        this.nombreTecnico = nombreTecnico;
     }
 }

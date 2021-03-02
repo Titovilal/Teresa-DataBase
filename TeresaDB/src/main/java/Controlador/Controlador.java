@@ -34,7 +34,7 @@ public class Controlador implements ActionListener {
     private Modelo modelo;
 
     /**
-     * polvora
+     * Constructor del controlador
      *
      * @param login
      * @param vista
@@ -51,22 +51,24 @@ public class Controlador implements ActionListener {
         vista.addWindowListener(new SalirPrograma());
 
         // <editor-fold defaultstate="collapsed" desc="Declaración de listeners y actioncommands">
-        login.buttonEntrar.addActionListener(this);
         login.buttonEntrar.setActionCommand("buttonEntrar");
-        vista.buttonAgendaClientes.addActionListener(this);
+        login.buttonEntrar.addActionListener(this);
         vista.buttonAgendaClientes.setActionCommand("buttonAgendaClientes");
-        vista.itemAddCliente.addActionListener(this);
+        vista.buttonAgendaClientes.addActionListener(this);
         vista.itemAddCliente.setActionCommand("buttonAddCliente");
-        modelo.panelAgenda.buttonAddCliente.addActionListener(this);
+        vista.itemAddCliente.addActionListener(this);
         modelo.panelAgenda.buttonAddCliente.setActionCommand("buttonAddCliente");
-        vista.itemGuardar.addActionListener(this);
+        modelo.panelAgenda.buttonAddCliente.addActionListener(this);
         vista.itemGuardar.setActionCommand("buttonGuardarCliente");
-        vista.itemAcutalizar.addActionListener(this);
+        vista.itemGuardar.addActionListener(this);
         vista.itemAcutalizar.setActionCommand("buttonActualizarCliente");
-        modelo.panelAgenda.buttonAddCliente.addActionListener(this);
+        vista.itemAcutalizar.addActionListener(this);
         modelo.panelAgenda.buttonAddCliente.setActionCommand("buttonAddCliente");
-        modelo.panelAgenda.buttonBuscar.addActionListener(this);
+        modelo.panelAgenda.buttonAddCliente.addActionListener(this);
         modelo.panelAgenda.buttonBuscar.setActionCommand("buttonBuscarCliente");
+        modelo.panelAgenda.buttonBuscar.addActionListener(this);
+        vista.buttonCias.setActionCommand("buttonCias");
+        vista.buttonCias.addActionListener(this);
         // </editor-fold>
     }
 
@@ -103,11 +105,13 @@ public class Controlador implements ActionListener {
                 modelo.vpc.buttonEditar.setText("Añadir");
                 modelo.vpc.setVisible(true);
                 break;
+
             case "buttonGuardarCliente":
                 modelo.guardarFicheroClientes();
                 service = modeloDrive.conectar();
                 modeloDrive.subirArchivo(service, TXTCLIENTES, RUTATXTCLIENTES);
                 break;
+
             case "buttonActualizarCliente":
                 /*
                 modeloDrive.bajarArchivo(modeloDrive.conectar(), TXTCLIENTES, carpetaDescargas);
@@ -120,6 +124,17 @@ public class Controlador implements ActionListener {
                 modelo.filtrarPanelClientes(modelo.panelAgenda.textNombre.getText(),
                         modelo.panelAgenda.textNombreZona.getText(),
                         modelo.panelAgenda.toggleRN.isSelected());
+                break;
+
+            case "buttonCias":
+                modelo.panelCias.setSize(735, 581);
+                vista.panelMain.removeAll();
+
+                modelo.rellenarPanelClientes();
+                vista.panelMain.add(modelo.panelCias, BorderLayout.CENTER);
+
+                vista.panelMain.revalidate();
+                vista.panelMain.repaint();
                 break;
             default:
                 break;

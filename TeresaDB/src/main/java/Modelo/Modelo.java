@@ -1,6 +1,7 @@
 package Modelo;
 
 import Vista.Clientes.*;
+import Vista.Cias.*;
 import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,13 +30,16 @@ public class Modelo {
     private static final String TXTCLIENTES = "clientes.txt";
     private static final String RUTATXTCLIENTES = "C:\\TeresaDB\\clientes.txt";
 
-    //VARIABLES CONSTRUCTOR  >> AGENDA CLIENTES
+    //VARIABLES CONSTRUCTOR >> AGENDA CLIENTES
     private ArrayList<Cliente> clientes;
     public ArrayList<CajaCliente> arrayCajaCliente, acc;
     private JPanel panelCajaClientes;
     private CajaCliente cajaCliente;
     public PanelAgenda panelAgenda;
     public VentanaPerfilCliente vpc;
+
+    //VARIABLES CONSTRUCTOR >> CIAS
+    public PanelCias panelCias;
 
     //CONSTROR DE LA CLASE
     public Modelo() {
@@ -44,18 +48,25 @@ public class Modelo {
         // <editor-fold defaultstate="collapsed" desc="Inicio variables agenda clientes">
         clientes = new ArrayList<>();
         panelAgenda = new PanelAgenda();
-        pluginTextField(panelAgenda.textNombreZona);
         panelCajaClientes = new JPanel();
-        vpc = new VentanaPerfilCliente(this);
         arrayCajaCliente = new ArrayList<>();
+        vpc = new VentanaPerfilCliente(this);
         acc = new ArrayList<>();
+        
+        pluginTextField(panelAgenda.textNombreZona);
         modeloDrive.bajarArchivo(modeloDrive.conectar(), TXTCLIENTES, DESCARGAS);
         leerFicheroClientes();
+        //Paneles con Los datos de cada cliente
         for (Cliente c : clientes) {
             cajaCliente = new CajaCliente(this);
             arrayCajaCliente.add(cajaCliente);
         }
         // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Inicio variables Cias">
+        panelCias = new PanelCias();
+        // </editor-fold>
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Modelo Agenda Clientes">
@@ -64,18 +75,18 @@ public class Modelo {
      * datos
      *
      */
+    @SuppressWarnings("ConvertToTryWithResources")
     public final void leerFicheroClientes() {
 
         try {
             String linea, dato = "";
-            System.out.println("1");
             BufferedReader br = new BufferedReader(new FileReader(new File(RUTATXTCLIENTES)));
-            System.out.println("2");
+
             while ((linea = br.readLine()) != null) {
                 Cliente cliente = new Cliente();
-                System.out.println("3");
+
                 for (int i = 0; i < linea.length(); i++) {
-                    
+
                     //Si el char no es un asterisco pero el siguiente si guarda el dato
                     if (linea.charAt(i) != '*' && linea.charAt(i + 1) == '*') {
                         dato = dato + linea.charAt(i);
@@ -99,16 +110,11 @@ public class Modelo {
                         }
                     }
                 }
-                System.out.println("4");
                 clientes.add(cliente);
-                
-                System.out.println("5");
-                br.close();
             }
-        } catch ( Exception e) {
-            //System.out.println(ex);
-            //JOptionPane.showMessageDialog(null, "No se ha podido leer el fichero"
-                 //   + " descargado de la nube");
+            br.close();
+        } catch (IOException e) {
+            System.out.println("Error leer fichero cliente" + e);
         }
     }
 
@@ -120,6 +126,7 @@ public class Modelo {
             PrintWriter pw = new PrintWriter(new File(RUTATXTCLIENTES));
             pw.close();
             pw = new PrintWriter(new FileWriter(new File(RUTATXTCLIENTES), true));
+
             for (Cliente c : clientes) {
                 for (int i = 0; i < 18; i++) {
                     pw.append(c.getDatos().get(i) + "*");
@@ -127,6 +134,7 @@ public class Modelo {
                 pw.append("\n");
             }
             pw.close();
+
         } catch (IOException ex) {
             Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "No se ha podido guardar el "
@@ -164,18 +172,6 @@ public class Modelo {
             }
         } while (diferente == false);
         return id;
-    }
-
-    /**
-     * Elegir numero aleatorio entre un maximo y un minimo
-     *
-     * @param min cota minima
-     * @param max cota maxima
-     * @return numero aleatorio entre cotas
-     */
-    public int numeroRandom(int min, int max) {
-        int numero = (int) floor(random() * (max - min + 1) + min);
-        return numero;
     }
 
     /**
@@ -222,7 +218,7 @@ public class Modelo {
         panelCajaClientes.setSize(685, 485);
         panelCajaClientes.setPreferredSize(new Dimension(685, 133 * clientes.size()));//144
         panelAgenda.scrollPaneMain.setViewportView(panelCajaClientes);
-        
+
         //Añade Informacion a las cajas de los clientes
         for (int i = 0; i < clientes.size(); i++) {
 
@@ -239,7 +235,7 @@ public class Modelo {
                 System.out.println("CajaCliente de sobra eliminada");
             }
         }
-        
+
         panelAgenda.revalidate();
         panelAgenda.repaint();
     }
@@ -356,11 +352,11 @@ public class Modelo {
         }
 
         if (filtrar == true) {
-            
+
             panelCajaClientes.removeAll();
             panelCajaClientes.setLayout(new BoxLayout(panelCajaClientes, BoxLayout.Y_AXIS));
             panelCajaClientes.setSize(685, 485);
-            panelCajaClientes.setPreferredSize(new Dimension(685, 133 * acc.size()));//144
+            panelCajaClientes.setPreferredSize(new Dimension(685, 133 * acc.size()));
             panelAgenda.scrollPaneMain.setViewportView(panelCajaClientes);
 
             for (CajaCliente c : acc) {
@@ -371,67 +367,67 @@ public class Modelo {
         }
     }
     // </editor-fold>
-    
+
     /**
-     * 
-     * @param textFieldName 
+     *
+     * @param textFieldName
      */
-    public void pluginTextField (javax.swing.JTextField textFieldName){
+    public final void pluginTextField(javax.swing.JTextField textFieldName) {
         // Our words to complete
-        ArrayList<String> keywords = new ArrayList<String>();
+        ArrayList<String> keywords = new ArrayList<>();
         //TODAS LAS PROVINCIAS DE ESPAÑA
-        keywords.add("a coruna");
-        keywords.add("alava");
-        keywords.add("albacete");
-        keywords.add("alicante");
-        keywords.add("almeria");
-        keywords.add("asturias");
-        keywords.add("avila");
-        keywords.add("badajoz");
-        keywords.add("baleares");
-        keywords.add("barcelona");
-        keywords.add("burgos");
-        keywords.add("caceres");
-        keywords.add("cadiz");
-        keywords.add("cantabria");
-        keywords.add("castellon");
-        keywords.add("ceuta");
-        keywords.add("ciudad real");
-        keywords.add("cordoba");
-        keywords.add("cuenca");
-        keywords.add("girona");
-        keywords.add("granada");
-        keywords.add("guadalajara");
-        keywords.add("guipuzcoa");
-        keywords.add("huelva");
-        keywords.add("huesca");
-        keywords.add("jaen");
-        keywords.add("la rioja");
-        keywords.add("las palmas");
-        keywords.add("leon");
-        keywords.add("lleida");
-        keywords.add("lugo");
-        keywords.add("madrid");
-        keywords.add("malaga");
-        keywords.add("melilla");
-        keywords.add("murcia");
-        keywords.add("navarra");
-        keywords.add("ourense");
-        keywords.add("palencia");
-        keywords.add("pontevedra");
-        keywords.add("salamanca");
-        keywords.add("tenerife");
-        keywords.add("segovia");
-        keywords.add("sevilla");
-        keywords.add("soria");
-        keywords.add("tarragona");
-        keywords.add("teruel");
-        keywords.add("toledo");
-        keywords.add("valencia");
-        keywords.add("valladolid");
-        keywords.add("vizcaya");
-        keywords.add("zamora");
-        keywords.add("zaragoza");
+        keywords.add("A coruna");
+        keywords.add("Alava");
+        keywords.add("Albacete");
+        keywords.add("Alicante");
+        keywords.add("Almeria");
+        keywords.add("Asturias");
+        keywords.add("Avila");
+        keywords.add("Badajoz");
+        keywords.add("Baleares");
+        keywords.add("Barcelona");
+        keywords.add("Burgos");
+        keywords.add("Caceres");
+        keywords.add("Cadiz");
+        keywords.add("Cantabria");
+        keywords.add("Castellon");
+        keywords.add("Ceuta");
+        keywords.add("Ciudad real");
+        keywords.add("Cordoba");
+        keywords.add("Cuenca");
+        keywords.add("Girona");
+        keywords.add("Granada");
+        keywords.add("Guadalajara");
+        keywords.add("Guipuzcoa");
+        keywords.add("Huelva");
+        keywords.add("Huesca");
+        keywords.add("Jaen");
+        keywords.add("La rioja");
+        keywords.add("Las palmas");
+        keywords.add("Leon");
+        keywords.add("Lleida");
+        keywords.add("Lugo");
+        keywords.add("Madrid");
+        keywords.add("Malaga");
+        keywords.add("Melilla");
+        keywords.add("Murcia");
+        keywords.add("Navarra");
+        keywords.add("Ourense");
+        keywords.add("Palencia");
+        keywords.add("Pontevedra");
+        keywords.add("Salamanca");
+        keywords.add("Tenerife");
+        keywords.add("Segovia");
+        keywords.add("Sevilla");
+        keywords.add("Soria");
+        keywords.add("Tarragona");
+        keywords.add("Teruel");
+        keywords.add("Toledo");
+        keywords.add("Valencia");
+        keywords.add("Valladolid");
+        keywords.add("Vizcaya");
+        keywords.add("amora");
+        keywords.add("Zaragoza");
 
         //TODAS LAS COMUNIDADES DE ESPAÑA
         keywords.add("Andalucía");
@@ -458,4 +454,17 @@ public class Modelo {
         textFieldName.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
         textFieldName.getActionMap().put("commit", autoComplete.new CommitAction());
     }
+    
+        /**
+     * Elegir numero aleatorio entre un maximo y un minimo
+     *
+     * @param min cota minima
+     * @param max cota maxima
+     * @return numero aleatorio entre cotas
+     */
+    public int numeroRandom(int min, int max) {
+        int numero = (int) floor(random() * (max - min + 1) + min);
+        return numero;
+    }
 }
+

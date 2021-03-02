@@ -1,21 +1,19 @@
 package Vista.Clientes;
+
 import Modelo.AutoCompletarTexto;
-import javax.swing.KeyStroke;
-import Modelo.AutoCompletarTexto;
-import java.util.ArrayList;
 
 /**
  *
  * @author Salva Castells Juan
  */
 public class PanelAgenda extends javax.swing.JPanel {
-    
+
     private AutoCompletarTexto act;
 
     public PanelAgenda() {
         initComponents();
         scrollPaneMain.getVerticalScrollBar().setUnitIncrement(12);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -155,7 +153,7 @@ public class PanelAgenda extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(scrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addComponent(scrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

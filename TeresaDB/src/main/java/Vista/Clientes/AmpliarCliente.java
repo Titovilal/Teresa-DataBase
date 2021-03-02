@@ -8,11 +8,11 @@ import javax.swing.JOptionPane;
  *
  * @author Salva Castells Juan
  */
-public class Ampliar extends javax.swing.JFrame {
+public class AmpliarCliente extends javax.swing.JFrame {
 
     private VentanaPerfilCliente vpc;
 
-    public Ampliar(VentanaPerfilCliente vpc) {
+    public AmpliarCliente(VentanaPerfilCliente vpc) {
         this.vpc = vpc;
         initComponents();
         this.addWindowListener(new SalirPrograma());
