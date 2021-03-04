@@ -40,6 +40,7 @@ public class Controlador implements ActionListener {
      * @param vista
      * @param modelo
      */
+    @SuppressWarnings("LeakingThisInConstructor")
     public Controlador(Login login, Vista vista, Modelo modelo) {
         this.vista = vista;
         this.modelo = modelo;
@@ -100,10 +101,10 @@ public class Controlador implements ActionListener {
                 break;
 
             case "buttonAddCliente":
-                modelo.vpc.limpiar();
-                modelo.vpc.buttonEliminar.setEnabled(false);
-                modelo.vpc.buttonEditar.setText("Añadir");
-                modelo.vpc.setVisible(true);
+                modelo.vpCliente.limpiar();
+                modelo.vpCliente.buttonEliminar.setEnabled(false);
+                modelo.vpCliente.buttonEditar.setText("Añadir");
+                modelo.vpCliente.setVisible(true);
                 break;
 
             case "buttonGuardarCliente":

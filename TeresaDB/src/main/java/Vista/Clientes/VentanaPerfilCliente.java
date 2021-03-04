@@ -737,34 +737,46 @@ public final class VentanaPerfilCliente extends javax.swing.JFrame {
                 toggleRN.setEnabled(true);
                 break;
             case "Guardar":
-                buttonEditar.setText("Editar");
-                textNombre.setEditable(false);
-                textNumMovil.setEditable(false);
-                textNumFijo.setEditable(false);
-                textCorreo.setEditable(false);
-                textDireccion.setEditable(false);
-                textLocalidad.setEditable(false);
-                textProvCom.setEditable(false);
-                textOcupacion.setEditable(false);
-                textNombreTeatro.setEditable(false);
-                textRed.setEditable(false);
-                textTipoProgramacion.setEditable(false);
-                textWeb.setEditable(false);
-                textEspComp.setEditable(false);
-                textObservaciones.setEditable(false);
-                textCorreo2.setEditable(false);
-                comboRed.setEnabled(false);
-                toggleRN.setEnabled(false);
-                modelo.editarCliente(getDatos());
-                modificado = true;
+                if (modelo.comprobarDatos(getDatos())) {
+                    buttonEditar.setText("Editar");
+                    textNombre.setEditable(false);
+                    textNumMovil.setEditable(false);
+                    textNumFijo.setEditable(false);
+                    textCorreo.setEditable(false);
+                    textDireccion.setEditable(false);
+                    textLocalidad.setEditable(false);
+                    textProvCom.setEditable(false);
+                    textOcupacion.setEditable(false);
+                    textNombreTeatro.setEditable(false);
+                    textRed.setEditable(false);
+                    textTipoProgramacion.setEditable(false);
+                    textWeb.setEditable(false);
+                    textEspComp.setEditable(false);
+                    textObservaciones.setEditable(false);
+                    textCorreo2.setEditable(false);
+                    comboRed.setEnabled(false);
+                    toggleRN.setEnabled(false);
+                    modelo.editarCliente(getDatos());
+                    modificado = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ha Ocurrido un error. \n "
+                            + "Elimina todos los '*' y '$' de los campos de texto.");
+                }
+
                 break;
             case "Añadir":
-                idCliente = modelo.generarIdCliente();
-                modelo.addCliente(getDatos());
-                JOptionPane.showMessageDialog(null, "Se ha añadido el cliente correctamente");
-                modificado = true;
-                added = true;
-                salir();
+                if (modelo.comprobarDatos(getDatos())) {
+                    idCliente = modelo.generarIdCliente();
+                    modelo.addCliente(getDatos());
+                    JOptionPane.showMessageDialog(null, "Se ha añadido el cliente correctamente");
+                    modificado = true;
+                    added = true;
+                    salir();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ha Ocurrido un error. \n "
+                            + "Elimina todos los '*' y '$' de los campos de texto.");
+                }
+
                 break;
             default:
                 break;

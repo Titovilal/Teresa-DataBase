@@ -1,11 +1,48 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Salva Castells Juan
  */
 public class Cia {
-    private String nombreCia,espectaculos,genero, correo, nombreTecnico;
+
+    private String id, nombreCia, correo, nombreTecnico, telefono;
+
+    private ArrayList<Espectaculo> espectaculos;
+
+    public Cia() {
+
+    }
+
+    public void addEspectaculo (Espectaculo esp){
+        espectaculos.add(esp);
+    }
+
+    public ArrayList<Espectaculo> getEspectaculos() {
+        return espectaculos;
+    }
+
+    public void setEspectaculos(ArrayList<Espectaculo> espectaculos) {
+        this.espectaculos = espectaculos;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNombreCia() {
         return nombreCia;
@@ -13,22 +50,6 @@ public class Cia {
 
     public void setNombreCia(String nombreCia) {
         this.nombreCia = nombreCia;
-    }
-
-    public String getEspectaculos() {
-        return espectaculos;
-    }
-
-    public void setEspectaculos(String espectaculos) {
-        this.espectaculos = espectaculos;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public String getCorreo() {

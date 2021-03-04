@@ -28,18 +28,25 @@ public class Modelo {
     //VARIABLES PARA EL MANEJO DE ARCHIVOS
     private static final String DESCARGAS = "C:\\TeresaDB\\";
     private static final String TXTCLIENTES = "clientes.txt";
+    private static final String TXTCIAS = "cias.txt";
     private static final String RUTATXTCLIENTES = "C:\\TeresaDB\\clientes.txt";
-
+    private static final String RUTATXTCIAS = "C:\\TeresaDB\\cias.txt";
+    
     //VARIABLES CONSTRUCTOR >> AGENDA CLIENTES
+    public PanelAgenda panelAgenda;
+    public ArrayList<CajaCliente> arrayCajaCliente, acClientes;
+    public VentanaPerfilCliente vpCliente;
     private ArrayList<Cliente> clientes;
-    public ArrayList<CajaCliente> arrayCajaCliente, acc;
     private JPanel panelCajaClientes;
     private CajaCliente cajaCliente;
-    public PanelAgenda panelAgenda;
-    public VentanaPerfilCliente vpc;
 
     //VARIABLES CONSTRUCTOR >> CIAS
     public PanelCias panelCias;
+    public ArrayList<CajaCia> arrayCajaCias, acCias;
+    public VentanaPerfilCia vpCia;
+    private ArrayList<Cia> cias;
+    private JPanel panelCajaCias;
+    private CajaCia cajaCia;
 
     //CONSTROR DE LA CLASE
     public Modelo() {
@@ -50,9 +57,9 @@ public class Modelo {
         panelAgenda = new PanelAgenda();
         panelCajaClientes = new JPanel();
         arrayCajaCliente = new ArrayList<>();
-        vpc = new VentanaPerfilCliente(this);
-        acc = new ArrayList<>();
-        
+        vpCliente = new VentanaPerfilCliente(this);
+        acClientes = new ArrayList<>();
+
         pluginTextField(panelAgenda.textNombreZona);
         modeloDrive.bajarArchivo(modeloDrive.conectar(), TXTCLIENTES, DESCARGAS);
         leerFicheroClientes();
@@ -65,8 +72,21 @@ public class Modelo {
 
         // <editor-fold defaultstate="collapsed" desc="Inicio variables Cias">
         panelCias = new PanelCias();
+        arrayCajaCias = new ArrayList<> ();
+        acCias = new ArrayList<> ();
+        vpCia = new VentanaPerfilCia(this);
+        cias = new ArrayList<>();
+        panelCajaCias = new JPanel();
+        
+        modeloDrive.bajarArchivo(modeloDrive.conectar(), TXTCIAS, DESCARGAS);
+        leerFicheroCias();
+        //Paneles con Los datos de cada cliente
+        for (Cia c : cias) {
+            cajaCia = new CajaCia(this,c);
+            arrayCajaCias.add(cajaCia);
+        }
+        
         // </editor-fold>
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="Modelo Agenda Clientes">
@@ -209,6 +229,25 @@ public class Modelo {
     }
 
     /**
+     * Comprueba si un vector contiene '*' o '$'
+     *
+     * @param datos
+     * @return True si no cotiene dichos caracteres
+     */
+    public boolean comprobarDatos(ArrayList<String> datos) {
+        boolean ok = true;
+
+        for (String dato : datos) {
+            for (int i = 0; i < dato.length(); i++) {
+                if (dato.charAt(i) == '*' || dato.charAt(i) == '$') {
+                    ok = false;
+                }
+            }
+        }
+        return ok;
+    }
+
+    /**
      * Crea un JPanel y muestra un berve contenido de cada cliente
      */
     public void rellenarPanelClientes() {
@@ -278,72 +317,72 @@ public class Modelo {
                 break;
 
             case "N0Z0R1":  //Solo Red Nacional
-                acc.clear();
+                acClientes.clear();
                 for (CajaCliente c : arrayCajaCliente) {
                     if (c.getDatos().get(11).equals("s")) {
-                        acc.add(c);
+                        acClientes.add(c);
                     }
                 }
                 break;
 
             case "N0Z1R0":  //Solo Nombre de Zona
-                acc.clear();
+                acClientes.clear();
                 for (CajaCliente c : arrayCajaCliente) {
                     if (c.getDatos().get(7).equals(nombreZona)) {
-                        acc.add(c);
+                        acClientes.add(c);
                     }
                 }
                 break;
 
             case "N1Z0R0":  // Solo Nombre Cliente
-                acc.clear();
+                acClientes.clear();
                 for (CajaCliente c : arrayCajaCliente) {
                     if (c.getDatos().get(1).contains(nombre)) {
-                        acc.add(c);
+                        acClientes.add(c);
                     }
                 }
                 break;
 
             case "N0Z1R1":  //Nombre de Zona + Red Nacional
-                acc.clear();
+                acClientes.clear();
                 for (CajaCliente c : arrayCajaCliente) {
                     if (c.getDatos().get(7).equals(nombreZona)) {
                         if (c.getDatos().get(11).equals("s")) {
-                            acc.add(c);
+                            acClientes.add(c);
                         }
                     }
                 }
                 break;
 
             case "N1Z0R1":  //Nombre Cliente + Red Nacional
-                acc.clear();
+                acClientes.clear();
                 for (CajaCliente c : arrayCajaCliente) {
                     if (c.getDatos().get(1).contains(nombre)) {
                         if (c.getDatos().get(11).equals("s")) {
-                            acc.add(c);
+                            acClientes.add(c);
                         }
                     }
                 }
                 break;
 
             case "N1Z1R0":  // Nombre Cliente + Nombre de Zona
-                acc.clear();
+                acClientes.clear();
                 for (CajaCliente c : arrayCajaCliente) {
                     if (c.getDatos().get(1).equals(nombre)) {
                         if (c.getDatos().get(7).equals(nombreZona)) {
-                            acc.add(c);
+                            acClientes.add(c);
                         }
                     }
                 }
                 break;
 
             case "N1Z1R1":  //  Nombre Cliente + Nombre de zona + Red Nacional
-                acc.clear();
+                acClientes.clear();
                 for (CajaCliente c : arrayCajaCliente) {
                     if (c.getDatos().get(1).contains(nombre)) {
                         if (c.getDatos().get(7).equals(nombreZona)) {
                             if (c.getDatos().get(11).equals("s")) {
-                                acc.add(c);
+                                acClientes.add(c);
                             }
                         }
                     }
@@ -356,18 +395,18 @@ public class Modelo {
             panelCajaClientes.removeAll();
             panelCajaClientes.setLayout(new BoxLayout(panelCajaClientes, BoxLayout.Y_AXIS));
             panelCajaClientes.setSize(685, 485);
-            panelCajaClientes.setPreferredSize(new Dimension(685, 133 * acc.size()));
+            panelCajaClientes.setPreferredSize(new Dimension(685, 133 * acClientes.size()));
             panelAgenda.scrollPaneMain.setViewportView(panelCajaClientes);
 
-            for (CajaCliente c : acc) {
+            for (CajaCliente c : acClientes) {
                 panelCajaClientes.add(c);
             }
             panelAgenda.revalidate();
             panelAgenda.repaint();
         }
     }
-    // </editor-fold>
 
+    // </editor-fold>
     /**
      *
      * @param textFieldName
@@ -455,7 +494,101 @@ public class Modelo {
         textFieldName.getActionMap().put("commit", autoComplete.new CommitAction());
     }
     
-        /**
+    /**
+     * Lee un fichero y lo transforma en un vector de Cias con todos sus
+     * datos
+     *
+     */
+    @SuppressWarnings("ConvertToTryWithResources")
+    public final void leerFicheroCias() {
+
+        try {
+            int k = 5;
+            Espectaculo espectaculo = new Espectaculo();
+            
+            String linea, dato = "";
+            BufferedReader br = new BufferedReader(new FileReader(new File(RUTATXTCIAS)));
+            ArrayList<String> info = new ArrayList<>();
+            while ((linea = br.readLine()) != null) {
+                Cia cia = new Cia();
+                
+                for (int i = 0; i < linea.length(); i++) {
+
+                    //Si el char no es un asterisco pero el siguiente si guarda el dato
+                    if (linea.charAt(i) != '*' && linea.charAt(i + 1) == '*') {
+                        dato = dato + linea.charAt(i);
+                        info.add(dato);
+                        dato = "";
+
+                    } //Si hay 2 asteriscos juntos se guarda el dato (null)
+                    else if (linea.charAt(i) == '*') {
+
+                        if ((i + 1) == linea.length()) {
+
+                        } else if (linea.charAt(i + 1) == '*') {
+                            info.add(dato);
+                            dato = "";
+                        }
+                    } else {
+
+                        if (linea.charAt(i) != '*') {
+                            //si el char no es un asterisco lo añade al string
+                            dato = dato + linea.charAt(i);
+                        }
+                    }
+                }
+                cia.setId(info.get(0));
+                cia.setNombreCia(info.get(1));
+                cia.setNombreTecnico(info.get(2));
+                cia.setTelefono(info.get(3));
+                cia.setCorreo(info.get(4));
+                
+                while (k < info.size()){
+                    espectaculo.setNombre(info.get(k));
+                    k++;
+                    espectaculo.setGenero(info.get(k));
+                    k++;
+                }
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println("Error leer fichero cliente" + e);
+        }
+    }
+    
+    /**
+     * Crea un JPanel y muestra un berve contenido de cada cliente
+     */
+    public void rellenarPanelCias() {
+        panelCajaCias.removeAll();
+
+        panelCajaCias.setLayout(new BoxLayout(panelCajaCias, BoxLayout.Y_AXIS));
+        panelCajaCias.setSize(685, 485);
+        panelCajaCias.setPreferredSize(new Dimension(685, 133 * clientes.size()));//144
+        panelCias.scrollPaneMain.setViewportView(panelCajaCias);
+
+        //Añade Informacion a las cajas de los clientes
+        for (int i = 0; i < cias.size(); i++) {
+
+            System.out.println("Cia " + i);
+
+            //arrayCajaCias.get(i).setDatos(clientes.get(i).getDatos());
+
+            panelCajaCias.add(arrayCajaCias.get(i));
+        }
+        //Elimina las cajas vacias para evitar psoibles errores de búsqueda
+        if (cias.size() < arrayCajaCias.size()) {
+            for (int i = cias.size(); i < arrayCajaCias.size(); i++) {
+                arrayCajaCias.remove(i);
+                System.out.println("CajaCia de sobra eliminada");
+            }
+        }
+
+        panelCias.revalidate();
+        panelCias.repaint();
+    }
+
+    /**
      * Elegir numero aleatorio entre un maximo y un minimo
      *
      * @param min cota minima
@@ -467,4 +600,3 @@ public class Modelo {
         return numero;
     }
 }
-
