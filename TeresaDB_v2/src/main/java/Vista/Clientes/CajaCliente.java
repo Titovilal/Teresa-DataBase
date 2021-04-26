@@ -23,7 +23,8 @@ public class CajaCliente extends javax.swing.JPanel {
     public void setActionListener(ActionListener al) {
         aux.addActionListener(al);
     }
-    public String getId(){
+
+    public String getId() {
         return datos.get(0);
     }
 
@@ -36,7 +37,12 @@ public class CajaCliente extends javax.swing.JPanel {
         labelId.setText(datos.get(0));
         labelPersona.setText(datos.get(1));
         labelCorreo.setText(datos.get(4));
-        labelZonaTrabajo.setText(datos.get(6) + ", " + datos.get(7));
+        if (datos.get(6).isEmpty()) {
+            labelZonaTrabajo.setText(datos.get(7));
+        } else {
+            labelZonaTrabajo.setText(datos.get(6) + ", " + datos.get(7));
+        }
+
         labelOcupacion.setText(datos.get(8));
         labelNombreTeatro.setText(datos.get(9));
         if (datos.get(11).equalsIgnoreCase("s")) {

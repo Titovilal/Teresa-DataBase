@@ -49,7 +49,7 @@ public class Modelo_AC {
     private ArrayList<Cliente> clientes;
     private boolean inicio = true;
     public boolean mod = false;
-    
+
     public Modelo_AC() {
         //1.-Inicializamos las variables en memoria
         clientes = new ArrayList<>();
@@ -236,6 +236,7 @@ public class Modelo_AC {
             case "N0Z1R0":  //Solo Nombre de Zona
                 cajaclientes1.clear();
                 for (CajaCliente c : cajaclientes) {
+                    nombreZona = nombreZona.substring(0, 1).toUpperCase() + nombreZona.substring(1);
                     if (c.getDatos().get(7).equals(nombreZona)) {
                         cajaclientes1.add(c);
                     }
@@ -244,6 +245,7 @@ public class Modelo_AC {
 
             case "N1Z0R0":  // Solo Nombre Cliente
                 cajaclientes1.clear();
+                nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
                 for (CajaCliente c : cajaclientes) {
                     if (c.getDatos().get(1).contains(nombre)) {
                         cajaclientes1.add(c);
@@ -253,6 +255,7 @@ public class Modelo_AC {
 
             case "N0Z1R1":  //Nombre de Zona + Red Nacional
                 cajaclientes1.clear();
+                nombreZona = nombreZona.substring(0, 1).toUpperCase() + nombreZona.substring(1);
                 for (CajaCliente c : cajaclientes) {
                     if (c.getDatos().get(7).equals(nombreZona)) {
                         if (c.getDatos().get(11).equals("s")) {
@@ -264,6 +267,7 @@ public class Modelo_AC {
 
             case "N1Z0R1":  //Nombre Cliente + Red Nacional
                 cajaclientes1.clear();
+                nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
                 for (CajaCliente c : cajaclientes) {
                     if (c.getDatos().get(1).contains(nombre)) {
                         if (c.getDatos().get(11).equals("s")) {
@@ -275,6 +279,8 @@ public class Modelo_AC {
 
             case "N1Z1R0":  // Nombre Cliente + Nombre de Zona
                 cajaclientes1.clear();
+                nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
+                nombreZona = nombreZona.substring(0, 1).toUpperCase() + nombreZona.substring(1);
                 for (CajaCliente c : cajaclientes) {
                     if (c.getDatos().get(1).equals(nombre)) {
                         if (c.getDatos().get(7).equals(nombreZona)) {
@@ -286,6 +292,8 @@ public class Modelo_AC {
 
             case "N1Z1R1":  //  Nombre Cliente + Nombre de zona + Red Nacional
                 cajaclientes1.clear();
+                nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
+                nombreZona = nombreZona.substring(0, 1).toUpperCase() + nombreZona.substring(1);
                 for (CajaCliente c : cajaclientes) {
                     if (c.getDatos().get(1).contains(nombre)) {
                         if (c.getDatos().get(7).equals(nombreZona)) {
